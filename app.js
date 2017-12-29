@@ -2,9 +2,15 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+const mongoose = require('mongoose');
 
 const productRoutes = require("./api/routes/products");
 const orderRoutes = require("./api/routes/orders");
+
+
+mongoose.connect('mongodb://Admin:'+ process.env.MONGO_ATLAS_PW + '@cluster0-shard-00-00-nb0xu.mongodb.net:27017,cluster0-shard-00-01-nb0xu.mongodb.net:27017,cluster0-shard-00-02-nb0xu.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin', {
+  useMongoClient: true
+});
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
